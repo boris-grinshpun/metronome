@@ -1,44 +1,32 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export function useSound() {
-    let o: OscillatorNode | undefined
-    let g: GainNode | undefined
-    let context: AudioContext | undefined
+
+    const [context, setContext] = useState<AudioContext | undefined>()
     console.log('rendered', Date.now())
-
-    useEffect(() => {
-      createSound()
-      return () => {
-        if (context) 
-        context.close()
-      }
-    }, [])
     
-    function createSound() {
+    useEffect(()=>{
       if (!context) {
-        context = new AudioContext()
+        setContext(new AudioContext())
       }
-    }
-    function playSound() {
-      if (context) {
-        o = context.createOscillator()
-        g = context.createGain()
-        o.connect(g)
-        o.type = "sine"
-        g.connect(context.destination)
-  
-        o.start(0)
-        g.gain.exponentialRampToValueAtTime(
-          0.00001, context.currentTime + 0.04
-        )
-  
-        // o.stop()
-      }
+    },[])
+
+
+    function closeSound(){
+      if (context)
+        context.close()
     }
 
-    function stopSound(){
-      if (o)
-        o.stop()
+    function playSound() {
+      const context = new AudioContext()
+      const o = context.createOscillator()
+      const  g = context.createGain()
+      o.connect(g)
+      g.connect(context.destination)
+      o.start(0)
+      g.gain.exponentialRampToValueAtTime(
+        0.00001, context.currentTime + 0.1
+      )
     }
-    return { createSound, playSound, stopSound }
+    return { closeSound, playSound }
   }

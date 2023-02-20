@@ -4,45 +4,34 @@ import { useSound } from './utils/tick'
 import { Slider, Box } from '@mui/material'
 
 function App() {
-  const { createSound, playSound, stopSound } = useSound()
-  const [metronome, setMetronome] = useState<number | null>(null)
-  const [bpm, setBpm] = useState<number>(0)
+  const {playSound} = useSound()
+  const metronome = useRef<number | null>(null)
+  const [bpm, setBpm] = useState<number>(50)
+  console.log('app rendered', Date.now())
+
   useEffect(() => {
-    createSound()
-    return () => {
-      if (metronome)
-        clearInterval(metronome)
-    }
-  }, [])
-  useEffect(() => {
-    if (bpm > 0 && metronome) {
+    if (bpm > 0 && metronome.current) {
       stopMetronome()
       startMetronome()
     }
-    // console.log(bpm, metronome)
-    // console.log(!bpm || metronome !== null)
-    return () => {
-      if (metronome)
-        clearInterval(metronome)
-    }
   }, [bpm])
   const startMetronome = () => {
-
+    console.log('start metronome')
     const tick = setInterval(() => {
       console.log('playing')
       playSound()
     }, (1000 * 60) / (bpm))
 
-    setMetronome(tick)
+    metronome.current = tick
     console.log(tick, bpm)
 
   }
   const stopMetronome = () => {
-    if (metronome) {
-      clearInterval(metronome)
+    console.log('stop metronome')
+    if (metronome.current) {
+      clearInterval(metronome.current)
       console.log('stopped')
-      setMetronome(null)
-      // stopSound()
+      metronome.current = null
     }
   }
   const playHandler = () => {
@@ -54,7 +43,7 @@ function App() {
     stopMetronome()
   }
   const handleSlider = (e: any, val: any) => {
-    setBpm(Number(val))
+    setBpm(()=>Number(val))
   }
   return (
     <div className="App">
@@ -63,7 +52,7 @@ function App() {
           value={bpm}
           onChange={handleSlider} valueLabelDisplay="auto" />
       </Box>
-      <button disabled={!bpm || metronome !== null} onClick={playHandler}>start</button>
+      <button onClick={playHandler}>start</button>
       <button onClick={stopHandler}>stop</button>
     </div>
   )
