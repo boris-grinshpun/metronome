@@ -1,3 +1,38 @@
+input:not(.signature > input){
+    margin-right: 2em;
+}
 input {
-    width: 30px
+    width: 30px;
+}
+label {
+    font-size: .7em;
+    margin-right: .5em;
+    width: 30px;
+    display: inline-block;
+    text-align: left
+}
+.signature-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.controls-wrapper {
+    display: flex;
+}
+.on-off{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap:10px;
+}
+button {
+    width: 75px;
+    height: 75px
 }
