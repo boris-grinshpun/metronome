@@ -56,11 +56,14 @@ export function Controls() {
 
 
                 <div className="controls">
-
-
+                    <div className="bpm-wr">
+                        <label htmlFor="bpm">BPM</label>
+                        <input type="text" name="bpm" value={bpm}/>
+                    </div>
                     <div className="type">
                         <label htmlFor="type">Type</label>
-                        <select name="type" defaultValue="linear">
+                        <select name="type" defaultValue="none">
+                            <option value="none">None</option>
                             <option value="linear">Linear</option>
                             <option value="dynamic">Dynamic</option>
                         </select>
