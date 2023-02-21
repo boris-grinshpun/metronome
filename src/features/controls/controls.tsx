@@ -71,7 +71,7 @@ export function Controls() {
                     <div className="signature-wrapper">
                         <label htmlFor="signature">Sig.</label>
                         <div className="signature" id="signature">
-                            <input type="text" placeholder='4' /> /
+                            <input type="text" placeholder='4' />&nbsp;/&nbsp; 
                             <input type="text" placeholder='4' />
                         </div>
                     </div>

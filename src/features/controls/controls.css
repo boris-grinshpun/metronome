@@ -1,5 +1,5 @@
 input:not(.signature > input){
-    margin-right: 2em;
+    margin-right: .5em;
 }
 input {
     width: 30px;
@@ -15,10 +15,11 @@ label {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
 }
 .controls-wrapper {
     display: flex;
+    justify-content: space-between;
 }
 .on-off{
     display: flex;
