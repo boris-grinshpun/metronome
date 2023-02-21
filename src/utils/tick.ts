@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 export function useSound() {
 
     const [context, setContext] = useState<AudioContext | undefined>()
-    console.log('rendered', Date.now())
     
     useEffect(()=>{
       if (!context) {

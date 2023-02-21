@@ -7,7 +7,6 @@ function App() {
   const {playSound} = useSound()
   const metronome = useRef<number | null>(null)
   const [bpm, setBpm] = useState<number>(50)
-  console.log('app rendered', Date.now())
 
   useEffect(() => {
     if (bpm > 0 && metronome.current) {
@@ -18,7 +17,6 @@ function App() {
   const startMetronome = () => {
     console.log('start metronome')
     const tick = setInterval(() => {
-      console.log('playing')
       playSound()
     }, (1000 * 60) / (bpm))
 
@@ -27,7 +25,6 @@ function App() {
 
   }
   const stopMetronome = () => {
-    console.log('stop metronome')
     if (metronome.current) {
       clearInterval(metronome.current)
       console.log('stopped')
