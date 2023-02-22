@@ -4,6 +4,10 @@ export const reducer = (state, action) => {
             return {...state, bpm: state.bpm + action.payload}
         case 'decBpm':
             return {...state, bpm: state.bpm - action.payload}
+        case 'incBars':
+            return {...state, bars: state.bars + action.payload}
+        case 'decBars':
+            return {...state, bars: state.bars - action.payload}
         case 'incUp':
             return {...state, up: state.up + action.payload}
         case 'decUp':
