@@ -1,0 +1,23 @@
+button.up-down {
+    width: 20px;
+    height: 8px;
+    padding :0;
+    border-radius: 0px;
+    font-size: .1em;
+    line-height: .1em;
+    margin: 0;
+}
+
+.control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.buttons {
+    margin-top : 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 24px;
+}

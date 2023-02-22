@@ -1,9 +1,8 @@
 import './controls.css'
-import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
 import { useSound } from '../../utils/tick'
-
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
+import { InputNumber } from './inputNumber/inputNumber'
 export function Controls() {
     const [type, setType] = useState<string>("linear")
     const { playSound } = useSound()
@@ -53,12 +52,11 @@ export function Controls() {
                 value={bpm}
                 onChange={handleSlider} valueLabelDisplay="auto" />
             <div className="controls-wrapper">
-
-
                 <div className="controls">
+                    <InputNumber min={0} max={10} label="Up" placeholder='0' name="up" defaultValue={0}/>
                     <div className="bpm-wr">
                         <label htmlFor="bpm">BPM</label>
-                        <input type="text" name="bpm" value={bpm}/>
+                        <input type="text" name="bpm" value={bpm} />
                     </div>
                     <div className="type">
                         <label htmlFor="type">Type</label>
@@ -71,7 +69,7 @@ export function Controls() {
                     <div className="signature-wrapper">
                         <label htmlFor="signature">Sig.</label>
                         <div className="signature" id="signature">
-                            <input type="text" placeholder='4' />&nbsp;/&nbsp; 
+                            <input type="text" placeholder='4' />&nbsp;/&nbsp;
                             <input type="text" placeholder='4' />
                         </div>
                     </div>
