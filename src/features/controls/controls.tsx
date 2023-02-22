@@ -2,12 +2,23 @@ import './controls.css'
 import Slider from '@mui/material/Slider'
 import { useSound } from '../../utils/tick'
 import { useState, useEffect, useRef, useContext } from "react"
-import { InputNumber } from './inputNumber/inputNumber'
+import { InputNumber } from './input/InputNumber'
+import { ControlsContext } from "../../store/context"
+
 export function Controls() {
-    const [type, setType] = useState<string>("linear")
     const { playSound } = useSound()
     const metronome = useRef<number | null>(null)
     const [bpm, setBpm] = useState<number>(50)
+    const { 
+        type,
+        loops,
+        up,
+        upReps,
+        downReps,
+        down,
+        sigBeat,
+        sigTime
+    } = useContext(ControlsContext)
 
     useEffect(() => {
         if (bpm > 0 && metronome.current) {
@@ -53,10 +64,13 @@ export function Controls() {
                 onChange={handleSlider} valueLabelDisplay="auto" />
             <div className="controls-wrapper">
                 <div className="controls">
-                    <InputNumber min={0} max={10} label="Up" placeholder='0' name="up" defaultValue={0}/>
                     <div className="bpm-wr">
-                        <label htmlFor="bpm">BPM</label>
-                        <input type="text" name="bpm" value={bpm} />
+                        <InputNumber min={0} max={200} label="Bpm" placeholder='0' name="Bpm" value={bpm} defaultValue={60} />
+                    </div>
+                    <div className="one-line-wrapper">
+                        <InputNumber min={0} max={13} label="Sig" placeholder='0' name="SigBeat" value={sigBeat} defaultValue={4} />
+                            &nbsp;/&nbsp;
+                        <InputNumber min={0} max={13} label="" placeholder='0' name="SigTime" value={sigTime} defaultValue={4} />
                     </div>
                     <div className="type">
                         <label htmlFor="type">Type</label>
@@ -66,29 +80,16 @@ export function Controls() {
                             <option value="dynamic">Dynamic</option>
                         </select>
                     </div>
-                    <div className="signature-wrapper">
-                        <label htmlFor="signature">Sig.</label>
-                        <div className="signature" id="signature">
-                            <input type="text" placeholder='4' />&nbsp;/&nbsp;
-                            <input type="text" placeholder='4' />
-                        </div>
+                    <div className="one-line-wrapper">
+                        <InputNumber min={0} max={20} label="Up" placeholder='0' name="Up" value={up} defaultValue={2} />&nbsp;
+                        <InputNumber min={0} max={20} label="Reps" placeholder='0' name="UpReps" value={upReps} defaultValue={2} />
                     </div>
-                    <div className="interval">
-                        <label htmlFor="interval-up">Up</label>
-                        <input type="text" name="interval-up" placeholder='2' />
-                        <label htmlFor="reps-up">Reps</label>
-                        <input type="text" name="reps-up" placeholder='1' />
-
-                    </div>
-                    <div className="interval">
-                        <label htmlFor="interval-down">Down</label>
-                        <input type="text" name="interval-down" placeholder='2' />
-                        <label htmlFor="reps-down">Reps</label>
-                        <input type="text" name="reps-down" placeholder='1' />
+                    <div className="one-line-wrapper">
+                        <InputNumber min={0} max={20} label="Down" placeholder='0' name="Down" value={down} defaultValue={2} />&nbsp;
+                        <InputNumber min={0} max={20} label="Reps" placeholder='0' name="DownReps" value={downReps} defaultValue={2} />
                     </div>
                     <div className="loop">
-                        <label htmlFor="loop">Loops</label>
-                        <input type="text" name="loop" placeholder='1' />
+                        <InputNumber min={0} max={20} label="Loops" placeholder='0' name="Loops" value={loops} defaultValue={0} />
                     </div>
 
 

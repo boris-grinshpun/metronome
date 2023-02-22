@@ -2,7 +2,7 @@ import './App.css'
 import { createContext } from 'react'
 import { Graph } from './features/graph/graph'
 import { Controls } from './features/controls/controls'
-import { ParametersProvider } from './store'
+import { ParametersProvider } from './store/store'
 function App() {
   return (
     <div className="App">
