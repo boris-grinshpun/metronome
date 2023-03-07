@@ -1,10 +1,9 @@
 import './controls.css'
 import Slider from '@mui/material/Slider'
 import { useSound } from '../../utils/tick'
-import { useEffect, useRef, useContext } from "react"
+import { useEffect, useRef, useContext, EventHandler, ChangeEventHandler, ChangeEvent } from "react"
 import { InputNumber } from './input/InputNumber'
 import { ActionContext, ControlsContext } from "../../store/context"
-import { MetronomeActions } from '../../store/reducer'
 
 export function Controls() {
     const { playSound } = useSound()
@@ -18,7 +17,8 @@ export function Controls() {
         down,
         sigBeat,
         sigTime,
-        bpm
+        bpm,
+        graph
     } = useContext(ControlsContext)
     const dispatch = useContext(ActionContext)
     useEffect(() => {
@@ -56,7 +56,10 @@ export function Controls() {
         stopMetronome()
     }
     const handleSlider = (event: Event, value: number | number[], activeThumb: number) => {
-        dispatch({type: 'updateBpm', payload: Number(value) as number} as MetronomeActions)
+        dispatch({ type: 'updateBpm', payload: Number(value) as number })
+    }
+    const handleType = (event: ChangeEvent<HTMLSelectElement>) => {
+        dispatch({type: 'graph', payload: event.target.value})
     }
     return (
         <>
@@ -76,10 +79,10 @@ export function Controls() {
                         defaultValue={60} />
                     <div className="type">
                         <label htmlFor="type">Type</label>
-                        <select name="type" defaultValue="none">
-                            <option value="none">None</option>
-                            <option value="linear">Linear</option>
-                            <option value="dynamic">Dynamic</option>
+                        <select onChange={handleType} name="type" defaultValue="none" value={graph}>
+                            <option value="0">None</option>
+                            <option value="1">Linear</option>
+                            <option value="2">Dynamic</option>
                         </select>
                     </div>
                     <div className="one-line-wrapper">

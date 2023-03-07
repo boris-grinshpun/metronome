@@ -1,4 +1,4 @@
 import { createContext, Dispatch } from "react"
-import { InitialStateType, MetronomeActions } from "./reducer"
+import { InitialStateType, MetronomeTimeActions, MetronomeGraphActions } from "./reducer"
 export const ControlsContext = createContext<InitialStateType>({} as InitialStateType )
-export const ActionContext = createContext<Dispatch<MetronomeActions>>({} as Dispatch<MetronomeActions>)
+export const ActionContext = createContext<Dispatch<MetronomeTimeActions | MetronomeGraphActions>>({} as Dispatch<MetronomeTimeActions | MetronomeGraphActions>)

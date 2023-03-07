@@ -1,11 +1,17 @@
-export type MetronomeInputOptions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops"
-export type MetronomeListOptions = "linear" | "dynamic"
-export type MetronomeOptions = MetronomeInputOptions & Partial<MetronomeListOptions>
 
-export type MetronomeActions = {
-    type: MetronomeOptions
+export type MetronomeInputTypes = "bpm" | "bars" | "loops" | "up" | "upReps" | "downReps" | "down" | "sigBeat" | "sigTime"
+export type MetronomeInputActions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops"
+
+export type MetronomeTimeActions = {
+    type:  MetronomeInputActions
     payload: number
 }
+export type MetronomeGraphActions = {
+    type: "graph"
+    payload: string
+}
+
+// export type MetronomeActions = MetronomeTimeActions | MetronomeGraphActions
 export type InitialStateType = {
     bpm: number
     bars: number
@@ -15,10 +21,11 @@ export type InitialStateType = {
     downReps: number
     down: number
     sigBeat: number
-    sigTime: number
+    sigTime: number,
+    graph: string
 }
 
-export const reducer = (state: InitialStateType, action: MetronomeActions) => {
+export const reducer = (state: InitialStateType, action: MetronomeTimeActions | MetronomeGraphActions) => {
     switch (action.type) {
         case 'incbpm':
             return {...state, bpm: state.bpm + action.payload}
@@ -56,10 +63,8 @@ export const reducer = (state: InitialStateType, action: MetronomeActions) => {
             return {...state, loops: state.loops + action.payload}
         case 'decloops':
             return {...state, loops: state.loops - action.payload}
-        case 'linear':
-            return {...state, type: action.type}
-        case 'dynamic':
-            return {...state, type: action.type}
+        case 'graph':
+            return {...state, type: action.payload}
         case 'updateBpm':
             return {...state, bpm: action.payload}
         default:

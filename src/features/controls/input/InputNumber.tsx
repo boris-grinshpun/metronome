@@ -1,6 +1,6 @@
 import { KeyboardEvent, KeyboardEventHandler, useContext, useState } from "react"
 import { ActionContext, ControlsContext } from "../../../store/context"
-import { InitialStateType, MetronomeOptions } from "../../../store/reducer"
+import { MetronomeInputActions, MetronomeInputTypes } from "../../../store/reducer"
 import './input.css'
 
 export const InputNumber = (
@@ -20,17 +20,17 @@ export const InputNumber = (
         max: number,
         label: string,
         placeholder: string,
-        name: string,
+        name: MetronomeInputTypes,
         defaultValue: number
     }) => {
     const dispatch = useContext(ActionContext)
     const incHandler = () => {
-        const Name = ("inc" + name) as MetronomeOptions
+        const Name = ("inc" + name) as MetronomeInputActions
         console.log(Name)
         dispatch({ type: Name, payload: 1 })
     }
     const decHandler = () => {
-        const Name = ("dec" + name) as MetronomeOptions
+        const Name = ("dec" + name) as MetronomeInputActions
         console.log(Name)
         if (value)
             dispatch({ type: Name, payload: 1 })

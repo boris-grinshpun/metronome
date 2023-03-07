@@ -4,7 +4,7 @@ import { LineChart, AutoScaleAxis } from 'chartist';
 import { useContext, useEffect } from 'react';
 import { ControlsContext } from '../../store/context';
 
-export function Graph(props) {
+export function Graph() {
   const state = useContext(ControlsContext)
   console.log(state)
   //   {
