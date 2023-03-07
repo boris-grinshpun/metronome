@@ -1,6 +1,6 @@
-export type MetronomeInputOptions = "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops"
+export type MetronomeInputOptions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops"
 export type MetronomeListOptions = "linear" | "dynamic"
-export type MetronomeOptions = MetronomeInputOptions & MetronomeListOptions
+export type MetronomeOptions = MetronomeInputOptions & Partial<MetronomeListOptions>
 
 export type MetronomeActions = {
     type: MetronomeOptions
@@ -60,6 +60,8 @@ export const reducer = (state: InitialStateType, action: MetronomeActions) => {
             return {...state, type: action.type}
         case 'dynamic':
             return {...state, type: action.type}
+        case 'updateBpm':
+            return {...state, bpm: action.payload}
         default:
             return state
     }

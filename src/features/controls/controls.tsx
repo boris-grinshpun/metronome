@@ -1,14 +1,14 @@
 import './controls.css'
 import Slider from '@mui/material/Slider'
 import { useSound } from '../../utils/tick'
-import { useState, useEffect, useRef, useContext } from "react"
+import { useEffect, useRef, useContext } from "react"
 import { InputNumber } from './input/InputNumber'
 import { ActionContext, ControlsContext } from "../../store/context"
+import { MetronomeActions } from '../../store/reducer'
 
 export function Controls() {
     const { playSound } = useSound()
     const metronome = useRef<number | null>(null)
-    const [bpm, setBpm] = useState<number>(50)
     const {
         bars,
         loops,
@@ -17,7 +17,8 @@ export function Controls() {
         downReps,
         down,
         sigBeat,
-        sigTime
+        sigTime,
+        bpm
     } = useContext(ControlsContext)
     const dispatch = useContext(ActionContext)
     useEffect(() => {
@@ -54,14 +55,15 @@ export function Controls() {
     const stopHandler = () => {
         stopMetronome()
     }
-    const handleSlider = (e: any, val: any) => {
-        setBpm(() => Number(val))
+    const handleSlider = (event: Event, value: number | number[], activeThumb: number) => {
+        dispatch({type: 'updateBpm', payload: Number(value) as number} as MetronomeActions)
     }
     return (
         <>
             <Slider min={0} max={240} aria-label="Default"
                 value={bpm}
-                onChange={handleSlider} valueLabelDisplay="auto" />
+                onChange={handleSlider}
+                valueLabelDisplay="auto" />
             <div className="controls-wrapper">
                 <div className="controls">
                     <InputNumber
