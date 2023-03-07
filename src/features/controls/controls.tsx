@@ -58,7 +58,7 @@ export function Controls() {
     const handleSlider = (event: Event, value: number | number[], activeThumb: number) => {
         dispatch({ type: 'updateBpm', payload: Number(value) as number })
     }
-    const handleType = (event: ChangeEvent<HTMLSelectElement>) => {
+    const handleGraphType = (event: ChangeEvent<HTMLSelectElement>) => {
         dispatch({type: 'graph', payload: event.target.value})
     }
     return (
@@ -79,10 +79,10 @@ export function Controls() {
                         defaultValue={60} />
                     <div className="type">
                         <label htmlFor="type">Type</label>
-                        <select onChange={handleType} name="type" defaultValue="none" value={graph}>
-                            <option value="0">None</option>
-                            <option value="1">Linear</option>
-                            <option value="2">Dynamic</option>
+                        <select onChange={handleGraphType} name="type" defaultValue="none" value={graph}>
+                            <option value="none">None</option>
+                            <option value="linear">Linear</option>
+                            <option value="dynamic">Dynamic</option>
                         </select>
                     </div>
                     <div className="one-line-wrapper">

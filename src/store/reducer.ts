@@ -11,7 +11,6 @@ export type MetronomeGraphActions = {
     payload: string
 }
 
-// export type MetronomeActions = MetronomeTimeActions | MetronomeGraphActions
 export type InitialStateType = {
     bpm: number
     bars: number
@@ -64,7 +63,7 @@ export const reducer = (state: InitialStateType, action: MetronomeTimeActions | 
         case 'decloops':
             return {...state, loops: state.loops - action.payload}
         case 'graph':
-            return {...state, type: action.payload}
+            return {...state, graph: action.payload}
         case 'updateBpm':
             return {...state, bpm: action.payload}
         default:
