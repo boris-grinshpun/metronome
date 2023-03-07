@@ -1,5 +1,6 @@
-import { useContext, useState } from "react"
+import { KeyboardEvent, KeyboardEventHandler, useContext, useState } from "react"
 import { ActionContext, ControlsContext } from "../../../store/context"
+import { InitialStateType, MetronomeOptions } from "../../../store/reducer"
 import './input.css'
 
 export const InputNumber = (
@@ -10,26 +11,37 @@ export const InputNumber = (
         max = Infinity,
         label = "label",
         placeholder = "",
-        name = "",
+        name,
         defaultValue = 0
     }: {
-        buttons: boolean, min: number, value: number, max: number, label: string, placeholder: string, name: string, defaultValue: number
+        buttons?: boolean,
+        min: number,
+        value: number,
+        max: number,
+        label: string,
+        placeholder: string,
+        name: string,
+        defaultValue: number
     }) => {
-
     const dispatch = useContext(ActionContext)
     const incHandler = () => {
-        dispatch({ type: 'inc' + name, payload: 1 })
+        const Name = ("inc" + name) as MetronomeOptions
+        console.log(Name)
+        dispatch({ type: Name, payload: 1 })
     }
     const decHandler = () => {
-        dispatch({ type: 'dec' + name, payload: 1 })
+        const Name = ("dec" + name) as MetronomeOptions
+        console.log(Name)
+        if (value)
+            dispatch({ type: Name, payload: 1 })
     }
-    const keyDownHandler = (e) => {
+    const keyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         switch (e.key) {
             case 'ArrowUp':
                 incHandler()
                 break
             case 'ArrowDown':
-                incHandler()
+                decHandler()
                 break
         }
     }

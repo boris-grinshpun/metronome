@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext, ReactNode, useReducer } from 'react'
 import { reducer } from './reducer'
 import { ControlsContext, ActionContext } from './context'
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
     sigTime: 4
 }
 
-export const ParametersProvider = ({ children }) => {
+export const ParametersProvider = ({ children } : {children: ReactNode}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
