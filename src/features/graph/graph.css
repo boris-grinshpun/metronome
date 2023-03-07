@@ -4,3 +4,12 @@
 .ct-grid {
     stroke: rgb(255 255 255 / 54%);
 }
+
+.ct-line {
+    fill: none;
+    stroke-width: 1px;
+}
+.ct-point {
+    stroke-width: 5px;
+    stroke-linecap: round;
+}
