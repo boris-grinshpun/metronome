@@ -60,8 +60,6 @@ export function Graph() {
       i++
     }
 
-
-
     series.push(
       {
         x: i,
@@ -75,7 +73,6 @@ export function Graph() {
     new LineChart(
       '#chart',
       {
-        // labels: [...Array.from(Array(series.length - 1).keys()).map(i => i + 1)],
         series: [
           [
             ...series
@@ -92,7 +89,7 @@ export function Graph() {
           type: AutoScaleAxis,
           showLabel: false,
         },
-        width: '300px',
+        width: '350px',
         height: '200px',
       }
     );
