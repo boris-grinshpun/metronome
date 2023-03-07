@@ -5,33 +5,40 @@ import { useContext, useEffect } from 'react';
 import { ControlsContext } from '../../store/context';
 
 export function Graph() {
-  const state = useContext(ControlsContext)
-  console.log(state)
-  //   {
-  //     "bpm": 60,
-  //     "bars": 12,
-  //     "type": "linear",
-  //     "loops": 0,
-  //     "up": 1,
-  //     "upReps": 2,
-  //     "downReps": 2,
-  //     "down": 1,
-  //     "sigBeat": 4,
-  //     "sigTime": 4
-  // }
+    const {
+      bpm,
+      bars,
+      graph,
+      loops,
+      up,
+      upReps,
+      downReps,
+      down,
+      sigBeat,
+      sigTime,
+  }  = useContext(ControlsContext)
 
+  type GraphPoint = {
+    x: number,
+    y: number
+  }
   
+  const series:GraphPoint[] = []
+  for (let i = 0; i < bars; i++){
+    series.push(
+      {
+        x: i + 1,
+        y: bpm
+      }
+    )
+  }
   useEffect(() => {
     new LineChart(
       '#chart',
       {
         series: [
           [
-            { x: 1, y: 100 },
-            { x: 2, y: 50 },
-            { x: 3, y: 25 },
-            { x: 5, y: 12.5 },
-            { x: 8, y: 6.25 }
+           ...series
           ]
         ]
       },
@@ -42,7 +49,17 @@ export function Graph() {
         }
       }
     );
-  }, [])
+  }, [
+    bpm,
+      bars,
+      loops,
+      up,
+      upReps,
+      downReps,
+      down,
+      sigBeat,
+      sigTime
+  ])
 
   return (
     <div id="chart"></div>
