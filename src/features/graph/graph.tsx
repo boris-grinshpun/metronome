@@ -3,8 +3,9 @@ import './graph.css'
 import { LineChart, AutoScaleAxis, StepAxis } from 'chartist';
 import { useContext, useEffect } from 'react';
 import { ControlsContext } from '../../store/context';
+import { useSeries } from './useSeries';
 
-export function Graph() {
+export function Graph({ series }: { series: GraphPoint[] }) {
   const {
     bpm,
     bars,
@@ -17,57 +18,6 @@ export function Graph() {
     sigBeat,
     sigTime,
   } = useContext(ControlsContext)
-
-  type GraphPoint = {
-    x: number,
-    y: number
-  }
-
-  const series: GraphPoint[] = []
-  let isUp = true
-  let graphBpm = bpm
-  let graphUpReps = upReps
-  let graphDownReps = downReps
-  let graphBars = bars
-  let i = 1
-
-  series.push(
-    {
-      x: 1,
-      y: bpm
-    }
-  )
-
-  while (graphBars > 0) {
-
-    if (!graphUpReps) {
-      isUp = !isUp
-      graphUpReps = upReps
-    } else if (isUp) {
-      graphBpm = graphBpm + up
-      graphUpReps--
-      graphBars--
-      i++
-    }
-
-    if (!graphDownReps) {
-      isUp = !isUp
-      graphDownReps = downReps
-    } else if (!isUp) {
-      graphBpm = graphBpm - down
-      graphDownReps--
-      graphBars--
-      i++
-    }
-
-    series.push(
-      {
-        x: i,
-        y: graphBpm
-      }
-    )
-  }
-  console.log(series)
 
   useEffect(() => {
     new LineChart(

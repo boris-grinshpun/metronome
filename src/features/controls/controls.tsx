@@ -6,8 +6,6 @@ import { InputNumber } from './input/InputNumber'
 import { ActionContext, ControlsContext } from "../../store/context"
 
 export function Controls() {
-    const { playSound } = useSound()
-    const metronome = useRef<number | null>(null)
     const {
         bars,
         loops,
@@ -21,40 +19,7 @@ export function Controls() {
         graph
     } = useContext(ControlsContext)
     const dispatch = useContext(ActionContext)
-    useEffect(() => {
-        if (bpm > 0 && metronome.current) {
-            stopMetronome()
-            startMetronome()
-        }
-    }, [bpm])
-    const startMetronome = () => {
-        if (!metronome.current) {
-            console.log('start metronome')
-            const tick = setInterval(() => {
-                console.log('playing')
-                playSound()
-            }, (1000 * 60) / (bpm))
-
-            metronome.current = tick
-            console.log(tick, bpm)
-        }
-
-    }
-    const stopMetronome = () => {
-        if (metronome.current) {
-            clearInterval(metronome.current)
-            console.log('stopped')
-            metronome.current = null
-        }
-    }
-    const playHandler = () => {
-        if (bpm) {
-            startMetronome()
-        }
-    }
-    const stopHandler = () => {
-        stopMetronome()
-    }
+    
     const handleSlider = (event: Event, value: number | number[], activeThumb: number) => {
         dispatch({ type: 'updateBpm', payload: Number(value) as number })
     }
@@ -155,10 +120,7 @@ export function Controls() {
                         value={loops}
                         defaultValue={0} />
                 </div>
-                <div className="on-off">
-                    <button onClick={playHandler}>start</button>
-                    <button onClick={stopHandler}>stop</button>
-                </div>
+                
             </div>
         </>
 
