@@ -9,7 +9,7 @@ export const useMetronome = () => {
     const metronome = useRef<number | null>(null)
     const {
         bars,
-        loops,
+        totalBars,
         up,
         upReps,
         downReps,
@@ -20,6 +20,7 @@ export const useMetronome = () => {
     } = useContext(ControlsContext)
     const { ticks } = useSeries({
         bpm,
+        totalBars,
         upReps,
         downReps,
         bars,

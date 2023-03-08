@@ -10,7 +10,7 @@ export const Metronome = () => {
     const {
         bpm,
         bars,
-
+        totalBars,
         up,
         upReps,
         downReps,
@@ -20,6 +20,7 @@ export const Metronome = () => {
     } = useContext(ControlsContext)
     const { series } = useSeries({
         bpm,
+        totalBars,
         upReps,
         downReps,
         bars,

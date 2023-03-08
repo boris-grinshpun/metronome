@@ -17,7 +17,7 @@ export function Controls() {
         sigTime,
         bpm,
         graph,
-        maxBpm
+        totalBars
     } = useContext(ControlsContext)
     const dispatch = useContext(ActionContext)
 
@@ -49,10 +49,10 @@ export function Controls() {
                         buttons={true}
                         min={0}
                         max={200}
-                        label="Max Bpm"
+                        label="total Bars"
                         placeholder='0'
-                        name="maxBpm"
-                        value={maxBpm}
+                        name="totalBars"
+                        value={totalBars}
                         defaultValue={60} />
                 </div>
                     <div className="type">

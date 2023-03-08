@@ -2,6 +2,7 @@ import { InitialStateType } from "../../store/reducer"
 
 export const useSeries = ({
   bpm,
+  totalBars,
   upReps,
   downReps,
   bars,
@@ -10,7 +11,7 @@ export const useSeries = ({
   sigBeat,
   sigTime
 }:
-  Omit<InitialStateType, "graph" | "loops" | "maxBpm">
+  Omit<InitialStateType, "graph" | "loops">
 ) => {
 
   const series: GraphPoint[] = []
@@ -19,7 +20,7 @@ export const useSeries = ({
   let graphBpm = bpm
   let graphUpReps = upReps
   let graphDownReps = downReps
-  let graphBars = bars
+  let graphBars = totalBars
   let i = 0
 
   series.push(
@@ -31,7 +32,7 @@ export const useSeries = ({
   ticks.push(
     {
       bpm: bpm,
-      count: sigBeat
+      count: sigBeat * bars
     }
   )
 
@@ -54,7 +55,7 @@ export const useSeries = ({
       ticks.push(
         {
           bpm: graphBpm,
-          count: sigBeat
+          count: sigBeat * bars
         }
       )
     }
@@ -76,13 +77,13 @@ export const useSeries = ({
       ticks.push(
         {
           bpm: graphBpm,
-          count: sigBeat
+          count: sigBeat * bars
         }
       )
     }
 
 
-
+console.log(series, ticks)
   }
   return { series, ticks }
 }

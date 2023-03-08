@@ -8,7 +8,7 @@ export function Graph({ series }: { series: GraphPoint[] }) {
   const {
     bpm,
     bars,
-    graph,
+    totalBars,
     loops,
     up,
     upReps,
@@ -41,6 +41,7 @@ export function Graph({ series }: { series: GraphPoint[] }) {
           showLabel: true,
         },
         axisX: {
+          scaleMinSpace: 10,
           type: AutoScaleAxis,
           onlyInteger: true,
           showLabel: false,
@@ -61,7 +62,8 @@ export function Graph({ series }: { series: GraphPoint[] }) {
     downReps,
     down,
     sigBeat,
-    sigTime
+    sigTime,
+    totalBars
   ])
 
   return (
