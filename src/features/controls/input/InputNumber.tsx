@@ -1,6 +1,6 @@
 import { ChangeEvent, ChangeEventHandler, KeyboardEvent, KeyboardEventHandler, useContext, useState } from "react"
 import { ActionContext, ControlsContext } from "../../../store/context"
-import { MetronomeInputActions, MetronomeInputTypes } from "../../../store/reducer"
+import { MetronomeInputActions, MetronomeInputTypes, MetronomeValueActions } from "../../../store/reducer"
 import './input.css'
 
 export const InputNumber = (
@@ -46,7 +46,7 @@ export const InputNumber = (
         }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch({type: "setValue", payload: {[name]: Number(e.target.value)}})
+        dispatch({type: "setValue", payload: {[name]: Number(e.target.value)}} as MetronomeValueActions)
     }
     return (
         <div className="control">
