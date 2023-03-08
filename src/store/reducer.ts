@@ -1,6 +1,7 @@
 
-export type MetronomeInputTypes = "bpm" | "bars" | "loops" | "up" | "upReps" | "downReps" | "down" | "sigBeat" | "sigTime"
-export type MetronomeInputActions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops"
+export type MetronomeInputTypes = "bpm" | "bars" | "loops" | "up" | "upReps" | "downReps" | "down" | "sigBeat" | "sigTime" | "maxBpm"
+export type MetronomeInputActions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops" | "incmaxBpm" | "decmaxBpm"
+
 
 export type MetronomeTimeActions = {
     type: MetronomeInputActions
@@ -18,7 +19,8 @@ export type MetronomeValueActions = {
 }
 
 export type InitialStateType = {
-    bpm: number
+    bpm: number,
+    maxBpm: number
     bars: number
     loops: number
     up: number
@@ -36,6 +38,10 @@ export const reducer = (state: InitialStateType, action: MetronomeValueActions |
             return { ...state, bpm: state.bpm + action.payload }
         case 'decbpm':
             return { ...state, bpm: state.bpm - action.payload }
+        case 'incmaxBpm':
+            return { ...state, maxBpm: state.maxBpm + action.payload }
+        case 'decmaxBpm':
+            return { ...state, maxBpm: state.maxBpm - action.payload }
         case 'incbars':
             return { ...state, bars: state.bars + action.payload }
         case 'decbars':

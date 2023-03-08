@@ -1,9 +1,8 @@
 import 'chartist/dist/index.css';
 import './graph.css'
-import { LineChart, AutoScaleAxis, StepAxis, Interpolation } from 'chartist';
+import { LineChart, AutoScaleAxis, Interpolation } from 'chartist';
 import { useContext, useEffect } from 'react';
 import { ControlsContext } from '../../store/context';
-import { useSeries } from './useSeries';
 
 export function Graph({ series }: { series: GraphPoint[] }) {
   const {
@@ -31,12 +30,19 @@ export function Graph({ series }: { series: GraphPoint[] }) {
       },
       {
         axisY: {
+          // high: series[series.length-1].y,
+          // low: series[0].y,
+          // divisor: 8,
+          // ticks: series.map(t=>t.y),
+          // referenceValue: series[0].y,
+          scaleMinSpace: 11,
           type: AutoScaleAxis,
-          low: bpm,
           onlyInteger: true,
+          showLabel: true,
         },
         axisX: {
           type: AutoScaleAxis,
+          onlyInteger: true,
           showLabel: false,
         },
         width: '350px',

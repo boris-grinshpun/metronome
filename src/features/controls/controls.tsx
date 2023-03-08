@@ -16,7 +16,8 @@ export function Controls() {
         sigBeat,
         sigTime,
         bpm,
-        graph
+        graph,
+        maxBpm
     } = useContext(ControlsContext)
     const dispatch = useContext(ActionContext)
 
@@ -34,6 +35,7 @@ export function Controls() {
                 valueLabelDisplay="auto" />
             <div className="controls-wrapper">
                 <div className="controls">
+                <div className="one-line-wrapper">
                     <InputNumber
                         buttons={true}
                         min={0}
@@ -43,9 +45,19 @@ export function Controls() {
                         name="bpm"
                         value={bpm}
                         defaultValue={60} />
+                    <InputNumber
+                        buttons={true}
+                        min={0}
+                        max={200}
+                        label="Max Bpm"
+                        placeholder='0'
+                        name="maxBpm"
+                        value={maxBpm}
+                        defaultValue={60} />
+                </div>
                     <div className="type">
                         <label htmlFor="type">Type</label>
-                        <select onChange={handleGraphType} name="type" defaultValue="none" value={graph}>
+                        <select onChange={handleGraphType} name="type" value={graph}>
                             <option value="none">None</option>
                             <option value="linear">Linear</option>
                             <option value="dynamic">Dynamic</option>

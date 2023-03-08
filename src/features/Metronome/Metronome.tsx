@@ -10,8 +10,7 @@ export const Metronome = () => {
     const {
         bpm,
         bars,
-        graph,
-        loops,
+
         up,
         upReps,
         downReps,

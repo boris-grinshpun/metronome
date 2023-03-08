@@ -10,7 +10,7 @@ export const useSeries = ({
   sigBeat,
   sigTime
 }:
-  Omit<InitialStateType, "graph" | "loops">
+  Omit<InitialStateType, "graph" | "loops" | "maxBpm">
 ) => {
 
   const series: GraphPoint[] = []
@@ -20,11 +20,11 @@ export const useSeries = ({
   let graphUpReps = upReps
   let graphDownReps = downReps
   let graphBars = bars
-  let i = 1
+  let i = 0
 
   series.push(
     {
-      x: 1,
+      x: 0,
       y: bpm
     }
   )
@@ -84,6 +84,5 @@ export const useSeries = ({
 
 
   }
-  console.log('series', series)
   return { series, ticks }
 }

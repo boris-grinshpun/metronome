@@ -3,6 +3,7 @@ import {reducer } from './reducer'
 import { ControlsContext, ActionContext } from './context'
 const initialState = {
     bpm: 60,
+    maxBpm: 60,
     bars: 4,
     loops: 0,
     up: 1,

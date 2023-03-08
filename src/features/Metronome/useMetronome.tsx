@@ -17,7 +17,6 @@ export const useMetronome = () => {
         sigBeat,
         sigTime,
         bpm,
-        graph
     } = useContext(ControlsContext)
     const { ticks } = useSeries({
         bpm,
@@ -29,7 +28,6 @@ export const useMetronome = () => {
         sigBeat,
         sigTime
     })
-    console.log('ticks', ticks)
     useEffect(() => {
         if (bpm > 0 && metronome.current) {
             stopMetronome()
@@ -56,9 +54,6 @@ export const useMetronome = () => {
                 }
                 return intervalTick
             }(), (1000 * 60) / (ticks[currentBpmInd.current].bpm))
-
-
-            console.log(bpm)
         }
 
     }
