@@ -2,14 +2,14 @@ import { createContext, Dispatch, ReactNode, useReducer } from 'react'
 import {reducer } from './reducer'
 import { ControlsContext, ActionContext } from './context'
 const initialState = {
-    bpm: 60,
-    totalBars: 24,
-    bars: 4,
+    bpm: 132,
+    totalBars: 2,
+    bars: 2,
     loops: 0,
-    up: 1,
-    upReps: 2,
-    downReps: 2,
-    down: 1,
+    up: 8,
+    upReps: 1,
+    downReps: 1,
+    down: 8,
     sigBeat: 4,
     sigTime: 4,
     graph: "none"
