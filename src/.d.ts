@@ -1,4 +1,9 @@
 type GraphPoint = {
-    x: number,
-    y: number
-  }
+  x: number
+  y: number
+}
+
+type MetronomeTick = {
+  bpm: number
+  count: number
+}

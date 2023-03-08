@@ -19,12 +19,12 @@ export function Controls() {
         graph
     } = useContext(ControlsContext)
     const dispatch = useContext(ActionContext)
-    
+
     const handleSlider = (event: Event, value: number | number[], activeThumb: number) => {
         dispatch({ type: 'updateBpm', payload: Number(value) as number })
     }
     const handleGraphType = (event: ChangeEvent<HTMLSelectElement>) => {
-        dispatch({type: 'graph', payload: event.target.value})
+        dispatch({ type: 'graph', payload: event.target.value })
     }
     return (
         <>
@@ -120,7 +120,7 @@ export function Controls() {
                         value={loops}
                         defaultValue={0} />
                 </div>
-                
+
             </div>
         </>
 

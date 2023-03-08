@@ -1,9 +1,11 @@
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { ControlsContext } from "../../store/context"
 import { useSound } from "../../utils/tick"
+import { useSeries } from "../graph/useSeries"
 
-export const useMetronome = () =>{
+export const useMetronome = () => {
     const { playSound } = useSound()
+    const currentBpmInd = useRef<number>(0)
     const metronome = useRef<number | null>(null)
     const {
         bars,
@@ -17,6 +19,17 @@ export const useMetronome = () =>{
         bpm,
         graph
     } = useContext(ControlsContext)
+    const { ticks } = useSeries({
+        bpm,
+        upReps,
+        downReps,
+        bars,
+        down,
+        up,
+        sigBeat,
+        sigTime
+    })
+    console.log('ticks', ticks)
     useEffect(() => {
         if (bpm > 0 && metronome.current) {
             stopMetronome()
@@ -25,14 +38,27 @@ export const useMetronome = () =>{
     }, [bpm])
     const startMetronome = () => {
         if (!metronome.current) {
-            console.log('start metronome')
-            const tick = setInterval(() => {
-                console.log('playing')
-                playSound()
-            }, (1000 * 60) / (bpm))
+            let count = ticks[currentBpmInd.current].count
+            metronome.current = setInterval(function intervalTick() {
+                if (count < 1) {
+                    clearInterval(metronome.current as number)
+                    metronome.current = null
+                    if (ticks.length - 1 > currentBpmInd.current) {
+                        currentBpmInd.current++
+                        startMetronome()
+                    } else {
+                        stopMetronome()
+                    }
+                } else {
+                    console.log('bpm', ticks[currentBpmInd.current].bpm, 'count',currentBpmInd.current, count)
+                    playSound()
+                    count--
+                }
+                return intervalTick
+            }(), (1000 * 60) / (ticks[currentBpmInd.current].bpm))
 
-            metronome.current = tick
-            console.log(tick, bpm)
+
+            console.log(bpm)
         }
 
     }
@@ -40,8 +66,9 @@ export const useMetronome = () =>{
         if (metronome.current) {
             clearInterval(metronome.current)
             console.log('stopped')
-            metronome.current = null
         }
+        currentBpmInd.current = 0
+        metronome.current = null
     }
     const playHandler = () => {
         if (bpm) {
@@ -52,5 +79,5 @@ export const useMetronome = () =>{
         stopMetronome()
     }
 
-    return {playHandler, stopHandler}
+    return { playHandler, stopHandler }
 }

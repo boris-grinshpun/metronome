@@ -6,7 +6,7 @@ import { useSeries } from "../graph/useSeries"
 import { useMetronome } from "./useMetronome"
 
 export const Metronome = () => {
-    const {playHandler, stopHandler} = useMetronome()
+    const { playHandler, stopHandler } = useMetronome()
     const {
         bpm,
         bars,
@@ -19,13 +19,15 @@ export const Metronome = () => {
         sigBeat,
         sigTime,
     } = useContext(ControlsContext)
-    const series: GraphPoint[] = useSeries({
+    const { series } = useSeries({
         bpm,
         upReps,
         downReps,
         bars,
         down,
-        up
+        up,
+        sigBeat,
+        sigTime
     })
 
     return (
@@ -39,3 +41,6 @@ export const Metronome = () => {
         </>
     )
 }
+
+// tick
+// [{bpm: x, count}, {bpm: x, count}, {bpm: x, count}]

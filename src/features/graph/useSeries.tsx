@@ -1,20 +1,20 @@
+import { InitialStateType } from "../../store/reducer"
+
 export const useSeries = ({
   bpm,
   upReps,
   downReps,
   bars,
   down,
-  up
-}: {
-  bpm: number,
-  upReps: number,
-  downReps: number,
-  bars: number,
-  down: number,
-  up: number
-}) => {
+  up,
+  sigBeat,
+  sigTime
+}:
+  Omit<InitialStateType, "graph" | "loops">
+) => {
 
   const series: GraphPoint[] = []
+  const ticks: MetronomeTick[] = []
   let isUp = true
   let graphBpm = bpm
   let graphUpReps = upReps
@@ -28,6 +28,12 @@ export const useSeries = ({
       y: bpm
     }
   )
+  ticks.push(
+    {
+      bpm: bpm,
+      count: sigBeat
+    }
+  )
 
   while (graphBars > 0) {
 
@@ -39,9 +45,21 @@ export const useSeries = ({
       graphUpReps--
       graphBars--
       i++
+      series.push(
+        {
+          x: i,
+          y: graphBpm
+        }
+      )
+      ticks.push(
+        {
+          bpm: graphBpm,
+          count: sigBeat
+        }
+      )
     }
 
-    if (!graphDownReps) {
+    else if (!graphDownReps) {
       isUp = !isUp
       graphDownReps = downReps
     } else if (!isUp) {
@@ -49,15 +67,23 @@ export const useSeries = ({
       graphDownReps--
       graphBars--
       i++
+      series.push(
+        {
+          x: i,
+          y: graphBpm
+        }
+      )
+      ticks.push(
+        {
+          bpm: graphBpm,
+          count: sigBeat
+        }
+      )
     }
 
-    series.push(
-      {
-        x: i,
-        y: graphBpm
-      }
-    )
+
+
   }
-  console.log(series)
-  return series
+  console.log('series', series)
+  return { series, ticks }
 }
