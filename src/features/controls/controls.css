@@ -1,38 +1,25 @@
-input:not(.signature > input){
-    margin-right: .5em;
-}
-input {
-    width: 30px;
-}
-label {
-    font-size: .7em;
-    margin-right: .5em;
-    width: 30px;
-    display: inline-block;
-    text-align: left
-}
+
+
 .one-line-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    gap: 5px;
 }
+
 .controls-wrapper {
     display: flex;
     justify-content: space-between;
-}
-.on-off{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
 .controls {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap:10px;
+    gap: 10px;
 }
+
 button {
     width: 75px;
     height: 75px

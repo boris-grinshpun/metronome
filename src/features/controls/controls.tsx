@@ -61,7 +61,7 @@ export function Controls() {
                             name="sigBeat"
                             value={sigBeat}
                             defaultValue={4} />
-                        /&nbsp;
+                       &nbsp;/&nbsp;
                         <InputNumber
                             buttons={true}
                             min={0}
@@ -70,7 +70,7 @@ export function Controls() {
                             placeholder='0'
                             name="sigTime"
                             value={sigTime}
-                            defaultValue={4} />
+                            defaultValue={4} />&nbsp;
                         <InputNumber
                             buttons={true}
                             min={0}

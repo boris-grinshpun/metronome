@@ -4,7 +4,7 @@ import { Controls } from "../controls/controls"
 import { Graph } from "../graph/graph"
 import { useSeries } from "../graph/useSeries"
 import { useMetronome } from "./useMetronome"
-
+import './metronome.css'
 export const Metronome = () => {
     const { playHandler, stopHandler } = useMetronome()
     const {
@@ -33,14 +33,11 @@ export const Metronome = () => {
     return (
         <>
             <Graph series={series}></Graph>
-            <Controls></Controls>
-            <div className="on-off">
-                <button onClick={playHandler}>start</button>
-                <button onClick={stopHandler}>stop</button>
-            </div>
+                <Controls></Controls>
+                <div className="on-off">
+                    <button onClick={playHandler}>start</button>
+                    <button onClick={stopHandler}>stop</button>
+                </div>
         </>
     )
 }
-
-// tick
-// [{bpm: x, count}, {bpm: x, count}, {bpm: x, count}]

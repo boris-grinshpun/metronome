@@ -1,6 +1,6 @@
 button.up-down {
     width: 20px;
-    height: 8px;
+    height: 10px;
     padding :0;
     border-radius: 0px;
     font-size: .1em;
@@ -14,10 +14,40 @@ button.up-down {
     align-items: center;
 }
 .buttons {
-    margin-top : 3px;
+    margin-top : 1px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    height: 24px;
+    height: 20px;
+    margin-left: -21px;
+    /* border: 1px solid black; */
 }
+button.up-down:first-child{
+    border-bottom: 1px solid rgb(206, 206, 206);
+}
+
+label {
+    font-size: .7em;
+    margin-right: .5em;
+    width: 30px;
+    display: inline-block;
+    text-align: left
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+}
+input {
+    height: 18px;
+    border: 1px solid grey;
+    outline: none;
+    width: 40px;
+
+}
+input:focus {
+    border-color: grey;
+    outline: none;
+}
+

@@ -46,16 +46,15 @@ export const InputNumber = (
         }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch({type: "setValue", payload: {[name]: Number(e.target.value)}} as MetronomeValueActions)
+        dispatch({ type: "setValue", payload: { [name]: Number(e.target.value) } } as MetronomeValueActions)
     }
     return (
         <div className="control">
             {label ? <label htmlFor="interval-down">{label}</label> : null}
 
             <div className="input">
-                <input type="text" onChange={onChangeHandler} name="interval-down" value={value} placeholder={placeholder} onKeyDown={keyDownHandler} />
-            </div>
-            {
+                <input className="input" type="text" onChange={onChangeHandler} name="interval-down" value={value} placeholder={placeholder} onKeyDown={keyDownHandler} />
+                {
                 buttons ?
                     <div className="buttons">
                         <button className="up-down" onClick={incHandler}>+</button>
@@ -63,7 +62,9 @@ export const InputNumber = (
                     </div>
                     :
                     null
-            }
+                }
+            </div>
+
         </div>
     )
 }
