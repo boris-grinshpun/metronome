@@ -1,4 +1,4 @@
-import { KeyboardEvent, KeyboardEventHandler, useContext, useState } from "react"
+import { ChangeEvent, ChangeEventHandler, KeyboardEvent, KeyboardEventHandler, useContext, useState } from "react"
 import { ActionContext, ControlsContext } from "../../../store/context"
 import { MetronomeInputActions, MetronomeInputTypes } from "../../../store/reducer"
 import './input.css'
@@ -45,12 +45,15 @@ export const InputNumber = (
                 break
         }
     }
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch({type: "setValue", payload: {[name]: Number(e.target.value)}})
+    }
     return (
         <div className="control">
             {label ? <label htmlFor="interval-down">{label}</label> : null}
 
             <div className="input">
-                <input type="text" name="interval-down" value={value} placeholder={placeholder} onKeyDown={keyDownHandler} />
+                <input type="text" onChange={onChangeHandler} name="interval-down" value={value} placeholder={placeholder} onKeyDown={keyDownHandler} />
             </div>
             {
                 buttons ?

@@ -35,6 +35,7 @@ export function Controls() {
             <div className="controls-wrapper">
                 <div className="controls">
                     <InputNumber
+                        buttons={true}
                         min={0}
                         max={200}
                         label="Bpm"
@@ -51,7 +52,9 @@ export function Controls() {
                         </select>
                     </div>
                     <div className="one-line-wrapper">
-                        <InputNumber min={0}
+                        <InputNumber
+                            buttons={true}
+                            min={0}
                             max={13}
                             label="Sig"
                             placeholder='0'
@@ -59,7 +62,9 @@ export function Controls() {
                             value={sigBeat}
                             defaultValue={4} />
                         /&nbsp;
-                        <InputNumber min={0}
+                        <InputNumber
+                            buttons={true}
+                            min={0}
                             max={13}
                             label=""
                             placeholder='0'
@@ -67,6 +72,7 @@ export function Controls() {
                             value={sigTime}
                             defaultValue={4} />
                         <InputNumber
+                            buttons={true}
                             min={0}
                             max={200}
                             label="Bars"
@@ -77,6 +83,7 @@ export function Controls() {
                     </div>
                     <div className="one-line-wrapper">
                         <InputNumber
+                            buttons={true}
                             min={0}
                             max={20}
                             label="Up"
@@ -85,6 +92,7 @@ export function Controls() {
                             value={up}
                             defaultValue={2} />&nbsp;
                         <InputNumber
+                            buttons={true}
                             min={0}
                             max={20}
                             label="Reps"
@@ -95,6 +103,7 @@ export function Controls() {
                     </div>
                     <div className="one-line-wrapper">
                         <InputNumber
+                            buttons={true}
                             min={0}
                             max={20}
                             label="Down"
@@ -103,7 +112,9 @@ export function Controls() {
                             value={down}
                             defaultValue={2}
                         />&nbsp;
-                        <InputNumber min={0}
+                        <InputNumber
+                            buttons={true}
+                            min={0}
                             max={20}
                             label="Reps"
                             placeholder='0'
@@ -112,6 +123,7 @@ export function Controls() {
                             defaultValue={2} />
                     </div>
                     <InputNumber
+                        buttons={true}
                         min={0}
                         max={20}
                         label="Loops"

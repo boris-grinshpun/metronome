@@ -1,6 +1,6 @@
 import 'chartist/dist/index.css';
 import './graph.css'
-import { LineChart, AutoScaleAxis, StepAxis } from 'chartist';
+import { LineChart, AutoScaleAxis, StepAxis, Interpolation } from 'chartist';
 import { useContext, useEffect } from 'react';
 import { ControlsContext } from '../../store/context';
 import { useSeries } from './useSeries';
@@ -41,6 +41,9 @@ export function Graph({ series }: { series: GraphPoint[] }) {
         },
         width: '350px',
         height: '200px',
+        lineSmooth: Interpolation.none({
+          fillHoles: false
+        })
       }
     );
   }, [
