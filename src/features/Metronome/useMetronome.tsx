@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import { ControlsContext } from "../../store/context"
+import { ActionContext, ControlsContext } from "../../store/context"
 import { useSound } from "../../utils/tick"
 import { useSeries } from "../graph/useSeries"
 
@@ -7,6 +7,7 @@ export const useMetronome = () => {
     const { playSound } = useSound()
     const currentBpmInd = useRef<number>(0)
     const metronome = useRef<number | null>(null)
+    const dispatch = useContext(ActionContext)
     const {
         bars,
         totalBars,
@@ -44,6 +45,7 @@ export const useMetronome = () => {
                     metronome.current = null
                     if (ticks.length - 1 > currentBpmInd.current) {
                         currentBpmInd.current++
+                        dispatch({type: "updateBpmIndex", payload:currentBpmInd.current})
                         startMetronome()
                     } else {
                         stopMetronome()
@@ -64,6 +66,7 @@ export const useMetronome = () => {
             console.log('stopped')
         }
         currentBpmInd.current = 0
+        dispatch({type: "updateBpmIndex", payload:currentBpmInd.current})
         metronome.current = null
     }
     const playHandler = () => {

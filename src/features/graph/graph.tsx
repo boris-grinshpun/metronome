@@ -1,6 +1,6 @@
 import 'chartist/dist/index.css';
 import './graph.css'
-import { LineChart, AutoScaleAxis, Interpolation } from 'chartist';
+import { LineChart, AutoScaleAxis, Interpolation, Svg } from 'chartist';
 import { useContext, useEffect } from 'react';
 import { ControlsContext } from '../../store/context';
 
@@ -16,10 +16,11 @@ export function Graph({ series }: { series: GraphPoint[] }) {
     down,
     sigBeat,
     sigTime,
+    bpmIndex
   } = useContext(ControlsContext)
 
   useEffect(() => {
-    new LineChart(
+    const chart = new LineChart(
       '#chart',
       {
         series: [
@@ -53,7 +54,29 @@ export function Graph({ series }: { series: GraphPoint[] }) {
         })
       }
     );
+    chart.on('draw', data => {
+      // If the draw event was triggered from drawing a point on the line chart
+      console.log(bpmIndex)
+      if (data.type === 'point' && data.index === bpmIndex) {
+        console.log(data)
+        // We are creating a new path SVG element that draws a triangle around the point coordinates
+        const triangle = new Svg(
+          'circle',
+          {
+            cx:data.x,
+            cy:data.y,
+            r: 4,
+            style: 'fill-opacity: 1',
+            fill: '#FFFFFF'
+          },
+        );
+    
+        // With data.element we get the Chartist SVG wrapper and we can replace the original point drawn by Chartist with our newly created triangle
+        data.element.replace(triangle);
+      }
+    });
   }, [
+    bpmIndex,
     bpm,
     bars,
     loops,

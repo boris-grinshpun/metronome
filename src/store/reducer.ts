@@ -1,7 +1,6 @@
 
 export type MetronomeInputTypes = "bpm" | "bars" | "loops" | "up" | "upReps" | "downReps" | "down" | "sigBeat" | "sigTime" | "totalBars"
-export type MetronomeInputActions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops" | "inctotalBars" | "dectotalBars"
-
+export type MetronomeInputActions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops" | "inctotalBars" | "dectotalBars" | "updateBpmIndex"
 
 export type MetronomeTimeActions = {
     type: MetronomeInputActions
@@ -29,7 +28,8 @@ export type InitialStateType = {
     down: number
     sigBeat: number
     sigTime: number,
-    graph: string
+    graph: string,
+    bpmIndex: number
 }
 
 export const reducer = (state: InitialStateType, action: MetronomeValueActions | MetronomeTimeActions | MetronomeGraphActions) => {
@@ -80,6 +80,8 @@ export const reducer = (state: InitialStateType, action: MetronomeValueActions |
             return { ...state, bpm: action.payload }
         case 'setValue':
             return { ...state, ...action.payload }
+        case 'updateBpmIndex':
+            return { ...state, bpmIndex: action.payload }
         default:
             return state
     }
