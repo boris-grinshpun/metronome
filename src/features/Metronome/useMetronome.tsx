@@ -56,6 +56,7 @@ export const useMetronome = () => {
                     } else {
                         stopMetronome()
                         dispatch({type: 'updateCurrentCount', payload: sigBeat})
+                        dispatch({type: 'updateCurrentBar', payload: 1})
                     }
                 } else {
                     console.log('bpm', ticks[currentTickInd.current].bpm, 'totalCount', currentTickInd.current, totalCount)
