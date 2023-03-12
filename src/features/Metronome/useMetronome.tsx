@@ -87,6 +87,8 @@ export const useMetronome = () => {
         }
         currentTickInd.current = 0
         dispatch({ type: "updateTickIndex", payload: currentTickInd.current })
+        dispatch({type: 'updateCurrentCount', payload: sigBeat})
+        dispatch({type: 'updateCurrentBar', payload: 1})
         metronome.current = null
     }
     const playHandler = () => {
