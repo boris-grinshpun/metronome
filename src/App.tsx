@@ -7,6 +7,7 @@ import { Metronome } from './features/Metronome/Metronome'
 function App() {
   return (
     <div className="App">
+      <h1>Speed Metronome</h1>
       <div className="wrappewr">
           <ParametersProvider>
           <Metronome/>

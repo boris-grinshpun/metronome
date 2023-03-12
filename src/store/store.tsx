@@ -13,7 +13,10 @@ const initialState = {
     sigBeat: 4,
     sigTime: 4,
     graph: "none",
-    bpmIndex: 0
+    bpmIndex: 0,
+    currentCount: 4,
+    currentBar: 1,
+    tickIndex: 0
 }
 
 export const ParametersProvider = ({ children } : {children: ReactNode}) => {

@@ -11,7 +11,7 @@ export const useSeries = ({
   sigBeat,
   sigTime
 }:
-  Omit<InitialStateType, "graph" | "loops" | "bpmIndex">
+  Omit<InitialStateType, "graph" | "loops" | "tickIndex" | "currentCount" | "currentBar">
 ) => {
 
   const series: GraphPoint[] = []
@@ -81,9 +81,6 @@ export const useSeries = ({
         }
       )
     }
-
-
-console.log(series, ticks)
   }
   return { series, ticks }
 }

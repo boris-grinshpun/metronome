@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { ControlsContext } from "../../store/context"
 import { Controls } from "../controls/controls"
 import { Graph } from "../graph/graph"
@@ -17,8 +17,10 @@ export const Metronome = () => {
         down,
         sigBeat,
         sigTime,
+        currentCount,
+        currentBar
     } = useContext(ControlsContext)
-    const { series } = useSeries({
+    const { series, ticks } = useSeries({
         bpm,
         totalBars,
         upReps,
@@ -33,11 +35,16 @@ export const Metronome = () => {
     return (
         <>
             <Graph series={series}></Graph>
-                <Controls></Controls>
-                <div className="on-off">
-                    <button onClick={playHandler}>start</button>
-                    <button onClick={stopHandler}>stop</button>
-                </div>
+            <div className="indicators" >
+                <h3>Bpm: {bpm}</h3>
+                <h3>Count: {currentCount} </h3>
+                <h3>Bars: {currentBar} / {bars}</h3>
+            </div>
+            <Controls></Controls>
+            <div className="on-off">
+                <button onClick={playHandler}>start</button>
+                <button onClick={stopHandler}>stop</button>
+            </div>
         </>
     )
 }

@@ -5,7 +5,7 @@ import { useSeries } from "../graph/useSeries"
 
 export const useMetronome = () => {
     const { playSound } = useSound()
-    const currentBpmInd = useRef<number>(0)
+    const currentTickInd = useRef<number>(0)
     const metronome = useRef<number | null>(null)
     const dispatch = useContext(ActionContext)
     const {
@@ -36,27 +36,46 @@ export const useMetronome = () => {
             startMetronome()
         }
     }, [bpm])
+    
     const startMetronome = () => {
         if (!metronome.current) {
-            let count = ticks[currentBpmInd.current].count
+            let totalCount = ticks[currentTickInd.current].count
+            let beatCount = sigBeat
+            let barCount = 1
+            dispatch({type: 'updateCurrentCount', payload: totalCount})
             metronome.current = setInterval(function intervalTick() {
-                if (count < 1) {
+
+                if (totalCount < 1) {
                     clearInterval(metronome.current as number)
                     metronome.current = null
-                    if (ticks.length - 1 > currentBpmInd.current) {
-                        currentBpmInd.current++
-                        dispatch({type: "updateBpmIndex", payload:currentBpmInd.current})
+                    if (ticks.length - 1 > currentTickInd.current) {
+                        currentTickInd.current++
+                        dispatch({ type: "updateTickIndex", payload: currentTickInd.current })
+                        dispatch({type: 'updateCurrentBar', payload: 1})
                         startMetronome()
                     } else {
                         stopMetronome()
+                        dispatch({type: 'updateCurrentCount', payload: sigBeat})
                     }
                 } else {
-                    console.log('bpm', ticks[currentBpmInd.current].bpm, 'count',currentBpmInd.current, count)
+                    console.log('bpm', ticks[currentTickInd.current].bpm, 'totalCount', currentTickInd.current, totalCount)
+                    if (beatCount > 1) {
+                        if (sigBeat === beatCount) {
+                            dispatch({type: 'updateCurrentBar', payload: barCount})
+                            barCount++
+                        }
+                        dispatch({type: 'updateCurrentCount', payload: beatCount})
+                        beatCount--
+                    } else {
+                        dispatch({type: 'updateCurrentCount', payload: beatCount})
+                        beatCount = sigBeat
+                    }
                     playSound()
-                    count--
+                    totalCount--
                 }
+
                 return intervalTick
-            }(), (1000 * 60) / (ticks[currentBpmInd.current].bpm))
+            }(), (1000 * 60) / (ticks[currentTickInd.current].bpm))
         }
 
     }
@@ -65,8 +84,8 @@ export const useMetronome = () => {
             clearInterval(metronome.current)
             console.log('stopped')
         }
-        currentBpmInd.current = 0
-        dispatch({type: "updateBpmIndex", payload:currentBpmInd.current})
+        currentTickInd.current = 0
+        dispatch({ type: "updateTickIndex", payload: currentTickInd.current })
         metronome.current = null
     }
     const playHandler = () => {

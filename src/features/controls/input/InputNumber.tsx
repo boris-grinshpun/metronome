@@ -26,12 +26,10 @@ export const InputNumber = (
     const dispatch = useContext(ActionContext)
     const incHandler = () => {
         const Name = ("inc" + name) as MetronomeInputActions
-        console.log(Name)
         dispatch({ type: Name, payload: 1 })
     }
     const decHandler = () => {
         const Name = ("dec" + name) as MetronomeInputActions
-        console.log(Name)
         if (value)
             dispatch({ type: Name, payload: 1 })
     }

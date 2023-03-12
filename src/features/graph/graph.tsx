@@ -16,7 +16,7 @@ export function Graph({ series }: { series: GraphPoint[] }) {
     down,
     sigBeat,
     sigTime,
-    bpmIndex
+    tickIndex
   } = useContext(ControlsContext)
 
   useEffect(() => {
@@ -56,8 +56,7 @@ export function Graph({ series }: { series: GraphPoint[] }) {
     );
     chart.on('draw', data => {
       // If the draw event was triggered from drawing a point on the line chart
-      console.log(bpmIndex)
-      if (data.type === 'point' && data.index === bpmIndex) {
+      if (data.type === 'point' && data.index === tickIndex) {
         console.log(data)
         // We are creating a new path SVG element that draws a triangle around the point coordinates
         const triangle = new Svg(
@@ -76,7 +75,7 @@ export function Graph({ series }: { series: GraphPoint[] }) {
       }
     });
   }, [
-    bpmIndex,
+    tickIndex,
     bpm,
     bars,
     loops,
