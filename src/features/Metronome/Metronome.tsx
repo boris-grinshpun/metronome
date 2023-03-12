@@ -18,7 +18,8 @@ export const Metronome = () => {
         sigBeat,
         sigTime,
         currentCount,
-        currentBar
+        currentBar,
+        tickIndex
     } = useContext(ControlsContext)
     const { series, ticks } = useSeries({
         bpm,
@@ -36,7 +37,7 @@ export const Metronome = () => {
         <>
             <Graph series={series}></Graph>
             <div className="indicators" >
-                <h3>Bpm: {bpm}</h3>
+                <h3>Bpm: {ticks[tickIndex].bpm}</h3>
                 <h3>Count: {currentCount} </h3>
                 <h3>Bars: {currentBar} / {bars}</h3>
             </div>
