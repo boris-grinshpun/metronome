@@ -25,12 +25,15 @@ export const InputNumber = (
     }) => {
     const dispatch = useContext(ActionContext)
     const incHandler = () => {
-        const Name = ("inc" + name) as MetronomeInputActions
-        dispatch({ type: Name, payload: 1 })
+        if (max > (value + 1)){
+            const Name = ("inc" + name) as MetronomeInputActions
+            dispatch({ type: Name, payload: 1 })
+        }
     }
     const decHandler = () => {
         const Name = ("dec" + name) as MetronomeInputActions
-        if (value)
+        
+        if (min <= value - 1)
             dispatch({ type: Name, payload: 1 })
     }
     const keyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {

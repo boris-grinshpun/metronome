@@ -2,6 +2,7 @@ import { InitialStateType } from "../../store/reducer"
 
 export const useSeries = ({
   bpm,
+  targetBpm,
   totalBars,
   upReps,
   downReps,
@@ -35,14 +36,13 @@ export const useSeries = ({
       count: sigBeat * bars
     }
   )
-
-  while (graphBars > 0) {
+  while (graphBpm < targetBpm) {
 
     if (!graphUpReps) {
       isUp = !isUp
       graphUpReps = upReps
     } else if (isUp) {
-      graphBpm = graphBpm + up
+      graphBpm = graphBpm + up > targetBpm ? targetBpm :  graphBpm + up
       graphUpReps--
       graphBars--
       i++

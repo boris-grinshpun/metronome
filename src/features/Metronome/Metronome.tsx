@@ -9,6 +9,7 @@ export const Metronome = () => {
     const { playHandler, stopHandler } = useMetronome()
     const {
         bpm,
+        targetBpm,
         bars,
         totalBars,
         up,
@@ -23,6 +24,7 @@ export const Metronome = () => {
     } = useContext(ControlsContext)
     const { series, ticks } = useSeries({
         bpm,
+        targetBpm,
         totalBars,
         upReps,
         downReps,
@@ -32,7 +34,6 @@ export const Metronome = () => {
         sigBeat,
         sigTime
     })
-
     return (
         <>
             <Graph series={series}></Graph>

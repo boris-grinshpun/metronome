@@ -17,7 +17,8 @@ export function Controls() {
         sigTime,
         bpm,
         graph,
-        totalBars
+        totalBars,
+        targetBpm
     } = useContext(ControlsContext)
     const dispatch = useContext(ActionContext)
 
@@ -35,42 +36,60 @@ export function Controls() {
                 valueLabelDisplay="auto" />
             <div className="controls-wrapper">
                 <div className="controls">
-                <div className="one-line-wrapper">
-                    <InputNumber
-                        buttons={true}
-                        min={0}
-                        max={200}
-                        label="Bpm"
-                        placeholder='0'
-                        name="bpm"
-                        value={bpm}
-                        defaultValue={60} />
-                    <InputNumber
-                        buttons={true}
-                        min={0}
-                        max={200}
-                        label="total Bars"
-                        placeholder='0'
-                        name="totalBars"
-                        value={totalBars}
-                        defaultValue={60} />
-                </div>
-                    <div className="type">
+                    <div className="one-line-wrapper">
+                        <InputNumber
+                            buttons={true}
+                            min={0}
+                            max={200}
+                            label="Bpm"
+                            placeholder='0'
+                            name="bpm"
+                            value={bpm}
+                            defaultValue={60} />
+                        <InputNumber
+                            buttons={true}
+                            min={0}
+                            max={200}
+                            label="Bars per bpm"
+                            placeholder='0'
+                            name="bars"
+                            value={bars}
+                            defaultValue={4} />
+                        {/* <InputNumber
+                            buttons={true}
+                            min={0}
+                            max={200}
+                            label="Total Bars"
+                            placeholder='0'
+                            name="totalBars"
+                            value={totalBars}
+                            defaultValue={60} /> */}
+                        <InputNumber
+                            buttons={true}
+                            min={0}
+                            max={200}
+                            label="Target Bpm"
+                            placeholder='0'
+                            name="targetBpm"
+                            value={targetBpm}
+                            defaultValue={160} />
+                    </div>
+                    {/* <div className="type">
                         <label htmlFor="type">Type</label>
                         <select onChange={handleGraphType} name="type" value={graph}>
                             <option value="none">None</option>
                             <option value="linear">Linear</option>
                             <option value="dynamic">Dynamic</option>
                         </select>
-                    </div>
+                    </div> */}
                     <div className="one-line-wrapper">
-                        <InputNumber
+                        {/* <InputNumber
                             buttons={true}
                             min={0}
                             max={13}
-                            label="Sig"
                             placeholder='0'
                             name="sigBeat"
+                            label="Note"
                             value={sigBeat}
                             defaultValue={4} />
                        &nbsp;/&nbsp;
@@ -82,16 +101,7 @@ export function Controls() {
                             placeholder='0'
                             name="sigTime"
                             value={sigTime}
-                            defaultValue={4} />&nbsp;
-                        <InputNumber
-                            buttons={true}
-                            min={0}
-                            max={200}
-                            label="Bars"
-                            placeholder='0'
-                            name="bars"
-                            value={bars}
-                            defaultValue={4} />
+                            defaultValue={4} />&nbsp; */}
                     </div>
                     <div className="one-line-wrapper">
                         <InputNumber
@@ -102,18 +112,7 @@ export function Controls() {
                             placeholder='0'
                             name="up"
                             value={up}
-                            defaultValue={2} />&nbsp;
-                        <InputNumber
-                            buttons={true}
-                            min={0}
-                            max={20}
-                            label="Reps"
-                            placeholder='0'
-                            name="upReps"
-                            value={upReps}
                             defaultValue={2} />
-                    </div>
-                    <div className="one-line-wrapper">
                         <InputNumber
                             buttons={true}
                             min={0}
@@ -123,8 +122,19 @@ export function Controls() {
                             name="down"
                             value={down}
                             defaultValue={2}
-                        />&nbsp;
+                        />
                         <InputNumber
+                            buttons={true}
+                            min={1}
+                            max={20}
+                            label="Reps"
+                            placeholder='0'
+                            name="upReps"
+                            value={upReps}
+                            defaultValue={2} />
+                    </div>
+                    <div className="one-line-wrapper">
+                        {/* <InputNumber
                             buttons={true}
                             min={0}
                             max={20}
@@ -132,9 +142,9 @@ export function Controls() {
                             placeholder='0'
                             name="downReps"
                             value={downReps}
-                            defaultValue={2} />
+                        defaultValue={2} /> */}
                     </div>
-                    <InputNumber
+                    {/* <InputNumber
                         buttons={true}
                         min={0}
                         max={20}
@@ -142,7 +152,7 @@ export function Controls() {
                         placeholder='0'
                         name="loops"
                         value={loops}
-                        defaultValue={0} />
+                        defaultValue={0} /> */}
                 </div>
 
             </div>

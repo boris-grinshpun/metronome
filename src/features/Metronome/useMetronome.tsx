@@ -18,9 +18,11 @@ export const useMetronome = () => {
         sigBeat,
         sigTime,
         bpm,
+        targetBpm
     } = useContext(ControlsContext)
     const { ticks } = useSeries({
         bpm,
+        targetBpm,
         totalBars,
         upReps,
         downReps,

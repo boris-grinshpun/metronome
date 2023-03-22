@@ -7,6 +7,7 @@ import { ControlsContext } from '../../store/context';
 export function Graph({ series }: { series: GraphPoint[] }) {
   const {
     bpm,
+    targetBpm,
     bars,
     totalBars,
     loops,
@@ -77,6 +78,7 @@ export function Graph({ series }: { series: GraphPoint[] }) {
   }, [
     tickIndex,
     bpm,
+    targetBpm,
     bars,
     loops,
     up,

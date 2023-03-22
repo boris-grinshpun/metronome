@@ -1,6 +1,6 @@
 
-export type MetronomeInputTypes = "bpm" | "bars" | "loops" | "up" | "upReps" | "downReps" | "down" | "sigBeat" | "sigTime" | "totalBars"
-export type MetronomeInputActions = "updateBpm" | "incbpm" | "decbpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops" | "inctotalBars" | "dectotalBars" | "updateTickIndex" | "updateCurrentCount" | "updateCurrentBar"
+export type MetronomeInputTypes = "bpm" | "targetBpm" | "bars" | "loops" | "up" | "upReps" | "downReps" | "down" | "sigBeat" | "sigTime" | "totalBars"
+export type MetronomeInputActions = "updateBpm" | "incbpm" | "decbpm" | "inctargetBpm" | "dectargetBpm" | "incbars" | "decbars" | "incup" | "decup" | "incdown" | "decdown" | "incsigBeat" | "decsigBeat" | "incsigTime" | "decsigTime" | "incupReps" | "decupReps" | "incdownReps" | "decdownReps" | "incloops" | "decloops" | "inctotalBars" | "dectotalBars" | "updateTickIndex" | "updateCurrentCount" | "updateCurrentBar"
 
 export type MetronomeTimeActions = {
     type: MetronomeInputActions
@@ -19,6 +19,7 @@ export type MetronomeValueActions = {
 
 export type InitialStateType = {
     bpm: number,
+    targetBpm: number,
     totalBars: number
     bars: number
     loops: number
@@ -40,6 +41,10 @@ export const reducer = (state: InitialStateType, action: MetronomeValueActions |
             return { ...state, bpm: state.bpm + action.payload }
         case 'decbpm':
             return { ...state, bpm: state.bpm - action.payload }
+        case 'inctargetBpm':
+            return { ...state, targetBpm: state.targetBpm + action.payload }
+        case 'dectargetBpm':
+            return { ...state, targetBpm: state.targetBpm - action.payload }
         case 'inctotalBars':
             return { ...state, totalBars: state.totalBars + action.payload }
         case 'dectotalBars':
@@ -65,9 +70,9 @@ export const reducer = (state: InitialStateType, action: MetronomeValueActions |
         case 'decsigTime':
             return { ...state, sigTime: state.sigTime - action.payload }
         case 'incupReps':
-            return { ...state, upReps: state.upReps + action.payload }
+            return { ...state, upReps: state.upReps + action.payload, downReps: state.downReps + action.payload }
         case 'decupReps':
-            return { ...state, upReps: state.upReps - action.payload }
+            return { ...state, upReps: state.upReps - action.payload, downReps: state.downReps - action.payload }
         case 'incdownReps':
             return { ...state, downReps: state.downReps + action.payload }
         case 'decdownReps':

@@ -3,13 +3,14 @@ import {reducer } from './reducer'
 import { ControlsContext, ActionContext } from './context'
 const initialState = {
     bpm: 132,
+    targetBpm: 160,
     totalBars: 2,
     bars: 2,
     loops: 0,
     up: 8,
     upReps: 1,
     downReps: 1,
-    down: 8,
+    down: 4,
     sigBeat: 4,
     sigTime: 4,
     graph: "none",
