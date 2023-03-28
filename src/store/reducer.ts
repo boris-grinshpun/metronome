@@ -70,9 +70,9 @@ export const reducer = (state: InitialStateType, action: MetronomeValueActions |
         case 'decsigTime':
             return { ...state, sigTime: state.sigTime - action.payload }
         case 'incupReps':
-            return { ...state, upReps: state.upReps + action.payload, downReps: state.downReps + action.payload }
+            return { ...state, upReps: state.upReps + action.payload }
         case 'decupReps':
-            return { ...state, upReps: state.upReps - action.payload, downReps: state.downReps - action.payload }
+            return { ...state, upReps: state.upReps - action.payload }
         case 'incdownReps':
             return { ...state, downReps: state.downReps + action.payload }
         case 'decdownReps':

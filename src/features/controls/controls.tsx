@@ -50,7 +50,16 @@ export function Controls() {
                             buttons={true}
                             min={0}
                             max={200}
-                            label="Bars per bpm"
+                            label="Target Bpm"
+                            placeholder='0'
+                            name="targetBpm"
+                            value={targetBpm}
+                            defaultValue={160} />
+                        <InputNumber
+                            buttons={true}
+                            min={0}
+                            max={200}
+                            label="Bars"
                             placeholder='0'
                             name="bars"
                             value={bars}
@@ -64,15 +73,6 @@ export function Controls() {
                             name="totalBars"
                             value={totalBars}
                             defaultValue={60} /> */}
-                        <InputNumber
-                            buttons={true}
-                            min={0}
-                            max={200}
-                            label="Target Bpm"
-                            placeholder='0'
-                            name="targetBpm"
-                            value={targetBpm}
-                            defaultValue={160} />
                     </div>
                     {/* <div className="type">
                         <label htmlFor="type">Type</label>
@@ -123,26 +123,26 @@ export function Controls() {
                             value={down}
                             defaultValue={2}
                         />
+                    </div>
+                    <div className="one-line-wrapper">
                         <InputNumber
                             buttons={true}
                             min={1}
                             max={20}
-                            label="Reps"
+                            label="Up Reps"
                             placeholder='0'
                             name="upReps"
                             value={upReps}
                             defaultValue={2} />
-                    </div>
-                    <div className="one-line-wrapper">
-                        {/* <InputNumber
+                        <InputNumber
                             buttons={true}
                             min={0}
                             max={20}
-                            label="Reps"
+                            label="Down Reps"
                             placeholder='0'
                             name="downReps"
                             value={downReps}
-                        defaultValue={2} /> */}
+                            defaultValue={2} />
                     </div>
                     {/* <InputNumber
                         buttons={true}
